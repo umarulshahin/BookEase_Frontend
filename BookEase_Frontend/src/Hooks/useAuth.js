@@ -6,9 +6,11 @@ import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
 import { Login_Url, Register_Url } from "../Utils/Constance";
 import { setIsLogin, setUserData } from "../Redux/UserSlice";
+import useUser from "./useUser";
 
 const useAuth = () => {
   const navigate = useNavigate();
+  const {Get_User} = useUser()
   const dispatch = useDispatch();
 
   const Register_Axios = async (data,setSubmitting) => {
@@ -56,19 +58,13 @@ const useAuth = () => {
       if (response.status === 200) {
         const userDetails = jwtDecode(response.data.access);
 
-        const { username, role, user_id } = userDetails;
-
-        const user = {
-          username: username,
-          role: role,
-          user_id: user_id,
-        };
+        const { user_id } = userDetails;
 
         Cookies.set("userToken", JSON.stringify(response.data), {
           expires: 30,
         });
-        dispatch(setUserData(user));
         navigate("dashboard/");
+        Get_User(user_id)
         toast.success("Successfully Sign in");
       }
     } catch (error) {

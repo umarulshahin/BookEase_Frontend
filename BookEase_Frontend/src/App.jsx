@@ -8,6 +8,7 @@ import { Toaster } from "sonner";
 import Dashboard from "./Components/Dashboard";
 import PrivetRoute from "./PrivetRoute";
 import AuthPrivetRoute from "./AuthPrivetRoute";
+import Base_page from "./pages/Base_page";
 function App() {
   return (
     <>
@@ -17,7 +18,9 @@ function App() {
           <Router>
             <Routes>
               <Route path="/" element={<AuthPrivetRoute><Auth_Main_Page /></AuthPrivetRoute>} />
-              <Route path='/dashboard' element={<PrivetRoute><Dashboard /></PrivetRoute>} />
+              <Route path='/dashboard' element={<PrivetRoute><Base_page /></PrivetRoute>} >
+                <Route index element={<Dashboard />} />
+              </Route>
             </Routes>
           </Router>
         </PersistGate>

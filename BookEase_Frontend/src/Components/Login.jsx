@@ -17,9 +17,7 @@ const Login = () => {
       .required("Password is required"),
   });
 
-  // ✅ Handle Form Submission
   const handleSubmit = (values,{setSubmitting}) => {
-    console.log("Form Data:", values);
     Login_Axios(values,setSubmitting)
   };
 
