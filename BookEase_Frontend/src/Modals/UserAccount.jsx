@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import useUser from '../Hooks/useUser';
 
 const UserAccount = ({ data, isModal, onClose}) => {
   if (!isModal) return null;
@@ -9,9 +10,10 @@ const UserAccount = ({ data, isModal, onClose}) => {
   const [userData, setUserData] = useState({
     username: user?.username || '',
     email: user?.email || '',
-    profileEmoji: user?.profileEmoji || '👤'
+    profileEmoji: '👤'
   });
   
+  const {Update_UserAxios} = useUser() 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData(prev => ({
@@ -21,7 +23,8 @@ const UserAccount = ({ data, isModal, onClose}) => {
   };
   
   const handleSave = () => {
-    onSave(userData);
+    userData['id'] = user?.id
+    Update_UserAxios(userData)
     setIsEditing(false);
   };
   
@@ -29,42 +32,25 @@ const UserAccount = ({ data, isModal, onClose}) => {
     setUserData({
       username:user?.username || '',
       email:user?.email || '',
-      profileEmoji:user?.profileEmoji || '👤'
+      profileEmoji: '👤'
     });
     setIsEditing(false);
   };
   
-  const emojis = ['👤', '😀', '😎', '🤓', '🥸', '🤠', '👩‍💻', '👨‍💻', '🧑‍💼', '👨‍🚀'];
   
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-transparent bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 w-full max-w-md">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">User Profile</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+          <button onClick={onClose} className="text-gray-500 cursor-pointer hover:text-gray-700">
             ✕
           </button>
         </div>
         
         <div className="flex flex-col items-center mb-6">
-          {isEditing ? (
-            <div className="mb-4">
-              <div className="text-center mb-2">Select Profile Emoji</div>
-              <div className="flex flex-wrap justify-center gap-2">
-                {emojis.map((emoji, index) => (
-                  <button
-                    key={index}
-                    className={`text-2xl p-2 rounded-full ${emoji === userData.profileEmoji ? 'bg-blue-100' : 'hover:bg-gray-100'}`}
-                    onClick={() => setUserData(prev => ({ ...prev, profileEmoji: emoji }))}
-                  >
-                    {emoji}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ) : (
+
             <div className="text-6xl mb-4">{userData.profileEmoji}</div>
-          )}
         </div>
         
         <div className="space-y-4">
@@ -104,13 +90,13 @@ const UserAccount = ({ data, isModal, onClose}) => {
             <>
               <button
                 onClick={handleCancel}
-                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="px-4 py-2 border cursor-pointer border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-blue-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-blue-700"
+                className="px-4 cursor-pointer py-2 bg-orange-400 border border-transparent rounded-md text-sm font-medium text-white hover:bg-orange-500"
               >
                 Save
               </button>
@@ -118,8 +104,7 @@ const UserAccount = ({ data, isModal, onClose}) => {
           ) : (
             <button
               onClick={() => setIsEditing(true)}
-              className="px-4 py-2 bg-blue-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-blue-700"
-            >
+              className="px-4 py-2 cursor-pointer bg-orange-400 border border-transparent rounded-md text-sm font-medium text-white hover:bg-orange-500"            >
               Edit Profile
             </button>
           )}
