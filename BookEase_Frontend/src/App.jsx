@@ -13,6 +13,7 @@ import Spinner from "./Components/Spinner";
 function App() {
   
    const Dashboard = lazy(()=>import('./Components/Dashboard.jsx'))
+   const MyBooks = lazy(()=>import('./Components/MyBooks.jsx'))
 
 
   return (
@@ -25,6 +26,9 @@ function App() {
               <Route path="/" element={<AuthPrivetRoute><Auth_Main_Page /></AuthPrivetRoute>} />
               <Route path='/dashboard' element={<PrivetRoute><Base_page /></PrivetRoute>} >
                 <Route index element={<Suspense fallback={<Spinner />}><Dashboard/></Suspense>} />
+                <Route path="/dashboard/mybooks" element={<Suspense fallback={<Spinner />}><MyBooks/></Suspense>} />
+
+
               </Route>
             </Routes>
           </Router>

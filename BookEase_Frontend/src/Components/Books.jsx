@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BaseURL } from '../Utils/Constance';
+import { useNavigate } from 'react-router-dom';
+import ModalManager from '../Modals/ModalManager';
 
 const Books = React.memo(({ books }) => {
-  console.log(books, 'books');
   
+  const [isModal, setIsModal] = useState(false)
+  const [data,setData] = useState(null)
+
   if (!books || books.length === 0) {
     return <div className="text-center p-8">No books available</div>;
   }
-
+  
+  const handleViewBook = (book)=>{
+    setIsModal(!isModal)
+    if(book){
+      setData(book)
+    }
+  }
+  
   return (
     <div className="container mx-auto p-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -32,7 +43,7 @@ const Books = React.memo(({ books }) => {
                 </button>
                 <button 
                   className="bg-gray-200 font-semibold cursor-pointer hover:bg-gray-300 text-gray-800 py-2 px-2 rounded-md transition-colors"
-                  onClick={() => console.log('View book:', book.id)}
+                  onClick={() => handleViewBook(book)}
                 >
                   View
                 </button>
@@ -48,6 +59,12 @@ const Books = React.memo(({ books }) => {
           </div>
         ))}
       </div>
+      <ModalManager
+      data = {data}
+      modalType={"viewBook"}
+      isModal={isModal}
+      onClose={handleViewBook}
+       />
     </div>
   );
 });

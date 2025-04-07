@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { UserLogout } from '../Redux/UserSlice';
 import { RemoveBooks } from '../Redux/BooksSlice';
@@ -25,9 +25,9 @@ const Header = ({ handleAccount }) => {
   };
 
   return (
-    <header className="bg-orange-300 py-4 px-4 md:px-12 flex flex-wrap justify-between items-center shadow-md">
+    <header className="bg-orange-400 py-4 px-4 md:px-12 flex flex-wrap justify-between items-center shadow-md">
       <div className="text-2xl font-bold text-white">
-        BookEase
+        <Link to="/dashboard">BookEase</Link>
       </div>
       
       {/* Hamburger menu button for mobile */}
@@ -54,8 +54,8 @@ const Header = ({ handleAccount }) => {
       <nav className={`${
         mobileMenuOpen ? 'flex' : 'hidden'
       } md:flex flex-col md:flex-row w-full md:w-auto mt-4 md:mt-0 md:space-x-6 space-y-4 md:space-y-0`}>
-        <a href="#" className="text-white hover:text-orange-500 font-medium">About</a>
-        <a href="#" className="text-white hover:text-orange-500 font-medium">Books</a>
+        <a href="#"  className="text-white hover:text-orange-500 font-medium">About</a>
+        <a href="#" onClick={()=> navigate('/dashboard/mybooks')} className="text-white hover:text-orange-500 font-medium">MyBooks</a>
         <a href="#" onClick={handleAccount} className="text-white hover:text-orange-500 font-medium">Account</a>
         <a href="#" onClick={handleLogout} className="text-white hover:text-orange-500 font-medium">
           {token ? 'Logout' : 'Login'}
