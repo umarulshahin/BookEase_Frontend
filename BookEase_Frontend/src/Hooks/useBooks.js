@@ -2,7 +2,8 @@ import React from 'react'
 import UserAxios from '../Axios/UserAxios';
 import { BookManagement_Url } from '../Utils/Constance';
 import { useDispatch } from 'react-redux';
-import { addBooks } from '../Redux/BooksSlice';
+import { addBooks, addNewBooks } from '../Redux/BooksSlice';
+import { toast } from 'sonner';
 
 const useBooks = () => {
    
@@ -23,8 +24,32 @@ const useBooks = () => {
             console.error(error, "get books error");
         }
     }
+    
+    const Add_BookAxios = async (data)=>{
+        try{
+            const response = await UserAxios.post(BookManagement_Url,data,{
+                headers:{
+                    "Content-Type" : "Multipart/form-data"
+                }
+            })
+            if (response.status === 201){
+                console.log(response.data, "add book response")
+                dispatch(addNewBooks(response.data.data))
+                toast.success("Book added successfully")
+            }
+        }catch(error){
+            console.error(error, "add books error")
+            if (error.response?.status === 401){
+                toast.error("Unauthorized access. Please log in again.");
+       
+             }else if (error.response?.status === 400){
+       
+                toast.warning("Something went wrong. Please try again")
 
-    return {Get_Books}
+             }
+    }
+}
+    return {Get_Books,Add_BookAxios}
 }
 
 

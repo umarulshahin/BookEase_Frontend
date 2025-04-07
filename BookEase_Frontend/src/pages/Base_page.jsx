@@ -12,9 +12,9 @@ const Base_page = () => {
         setIsModal(!isModal)
     }
     return (
-        <div className='min-h-screen min-w-screen bg-gray-300 ' >
+        <div className='min-h-screen min-w-screen  bg-gray-300 ' >
           <Header handleAccount={handleAccount} />
-        <main className=' pt-8 '>
+        <main className=' pt-8  '>
           <Outlet />
         </main>
            <ModalManager

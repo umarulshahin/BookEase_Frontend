@@ -39,21 +39,26 @@ const UserAccount = ({ data, isModal, onClose}) => {
   
   
   return (
-    <div className="fixed inset-0 bg-transparent bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">User Profile</h2>
-          <button onClick={onClose} className="text-gray-500 cursor-pointer hover:text-gray-700">
-            ✕
-          </button>
-        </div>
-        
+    <div className="fixed inset-0 bg-white/10 backdrop-blur-sm bg-opacity-50  flex items-center justify-center p-4 z-50">
+    <div className="bg-white rounded-lg shadow-md w-full max-w-md">
+      
+      {/* Modal Header */}
+      <div className="flex bg-orange-400 py-4 px-4 rounded-t-lg justify-between items-center">
+        <h2 className="text-xl font-bold text-white">{isEditing ? 'Edit Profile' : 'User Profile'}</h2>
+        <button onClick={onClose} className="text-white cursor-pointer text-xl font-bold hover:text-gray-200">
+          ✕
+        </button>
+      </div>
+  
+      {/* Modal Body with Padding */}
+      <div className="p-6">
         <div className="flex flex-col items-center mb-6">
-
-            <div className="text-6xl mb-4">{userData.profileEmoji}</div>
+          <div className="text-6xl mb-4">{userData.profileEmoji}</div>
         </div>
-        
+  
+        {/* Form Fields */}
         <div className="space-y-4">
+          {/* Username Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
             {isEditing ? (
@@ -62,13 +67,14 @@ const UserAccount = ({ data, isModal, onClose}) => {
                 name="username"
                 value={userData.username}
                 onChange={handleChange}
-                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full p-2 border border-gray-300 rounded  focus:outline-gray-300"
               />
             ) : (
               <div className="p-2 bg-gray-50 rounded">{userData.username}</div>
             )}
           </div>
-          
+  
+          {/* Email Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             {isEditing ? (
@@ -77,14 +83,15 @@ const UserAccount = ({ data, isModal, onClose}) => {
                 name="email"
                 value={userData.email}
                 onChange={handleChange}
-                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full p-2 border  border-gray-300 rounded  focus:outline-gray-300"
               />
             ) : (
               <div className="p-2 bg-gray-50 rounded">{userData.email}</div>
             )}
           </div>
         </div>
-        
+  
+        {/* Footer Buttons */}
         <div className="mt-6 flex justify-end gap-2">
           {isEditing ? (
             <>
@@ -96,7 +103,7 @@ const UserAccount = ({ data, isModal, onClose}) => {
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 cursor-pointer py-2 bg-orange-400 border border-transparent rounded-md text-sm font-medium text-white hover:bg-orange-500"
+                className="px-4 py-2 cursor-pointer bg-orange-400 border border-transparent rounded-md text-sm font-medium text-white hover:bg-orange-500"
               >
                 Save
               </button>
@@ -104,13 +111,16 @@ const UserAccount = ({ data, isModal, onClose}) => {
           ) : (
             <button
               onClick={() => setIsEditing(true)}
-              className="px-4 py-2 cursor-pointer bg-orange-400 border border-transparent rounded-md text-sm font-medium text-white hover:bg-orange-500"            >
+              className="px-4 py-2 cursor-pointer bg-orange-400 border border-transparent rounded-md text-sm font-medium text-white hover:bg-orange-500"
+            >
               Edit Profile
             </button>
           )}
         </div>
       </div>
     </div>
+  </div>
+  
   );
 };
 

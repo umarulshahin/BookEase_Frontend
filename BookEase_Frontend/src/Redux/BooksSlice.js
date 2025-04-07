@@ -13,11 +13,14 @@ const BooksSlice = createSlice({
         addBooks:(state,action)=>{
             state.books = action.payload
         },
+        addNewBooks(state,action){
+            state.books = [...state.books,action.payload]
+        },
         RemoveBooks:(state,action)=>{
             state.books = null
         }
     }
 })
 
-export const {addBooks,RemoveBooks} = BooksSlice.actions
+export const {addBooks,RemoveBooks,addNewBooks} = BooksSlice.actions
 export default  BooksSlice.reducer
