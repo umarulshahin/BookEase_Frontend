@@ -3,6 +3,7 @@ import UserAccount from './UserAccount'
 import ViewBook from './ViewBook'
 import AddBook from './AddBook'
 import DeleteBook from './DeleteBook'
+import EditBook from './EditBook'
 
 const ModalManager = ({data,modalType,isModal,onClose}) => {
     
@@ -18,6 +19,9 @@ const ModalManager = ({data,modalType,isModal,onClose}) => {
 
         case "deleteBook":
             return (<DeleteBook data={data} isModal={isModal} onClose={onClose} />)
+
+        case "editBook":
+            return (<EditBook data={data} isModal={isModal} onClose={onClose} />)
         default:
             return null
     }

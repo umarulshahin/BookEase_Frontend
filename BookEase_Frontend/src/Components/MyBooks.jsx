@@ -57,7 +57,7 @@ const MyBooks = () => {
               <Eye size={20} />
             </button>
               <button
-                // onClick={() => handleEdit(book.id)}
+                onClick={() => handleModals(book, "editBook")}
                 className="p-2 cursor-pointer rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors"
               >
                 <Edit size={20} />
