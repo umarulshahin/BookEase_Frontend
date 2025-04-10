@@ -55,6 +55,7 @@ const Header = ({ handleAccount }) => {
         mobileMenuOpen ? 'flex' : 'hidden'
       } md:flex flex-col md:flex-row w-full md:w-auto mt-4 md:mt-0 md:space-x-6 space-y-4 md:space-y-0`}>
         <a href="#"  className="text-white hover:text-orange-500 font-medium">About</a>
+        <a href="#" onClick={()=> navigate('/dashboard/readinglist')}  className="text-white hover:text-orange-500 font-medium">Readin List</a>        
         <a href="#" onClick={()=> navigate('/dashboard/mybooks')} className="text-white hover:text-orange-500 font-medium">MyBooks</a>
         <a href="#" onClick={handleAccount} className="text-white hover:text-orange-500 font-medium">Account</a>
         <a href="#" onClick={handleLogout} className="text-white hover:text-orange-500 font-medium">

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BaseURL } from "../Utils/Constance";
+import { useSelector } from "react-redux";
+import useBooks from "../Hooks/useBooks";
 
 const ViewBook = ({ data, isModal, onClose }) => {
   if (!isModal) return null;
   const [book, setBook] = useState(data);
-  const [addedToReadList, setAddedToReadList] = useState(false);
+  const user = useSelector((state)=> state.userdata.user_data)
+  const {addReadingListAxios} = useBooks()
 
   if (!book) {
     return (
@@ -23,9 +26,14 @@ const ViewBook = ({ data, isModal, onClose }) => {
   }
 
   const handleAddToReadList = () => {
-    // Add your logic here to add the book to read list
-    setAddedToReadList(true);
-    setTimeout(() => setAddedToReadList(false), 2000);
+
+    const data ={
+      user_id:user.id,
+      book_id:book.id   }
+
+    addReadingListAxios(data)
+
+
   };
 
   return (
@@ -91,11 +99,8 @@ const ViewBook = ({ data, isModal, onClose }) => {
             <div className="mt-8">
               <button
                 onClick={handleAddToReadList}
-                className={`px-4 py-2 rounded-lg text-white font-medium transition-colors ${
-                  addedToReadList ? "bg-green-500" : "bg-orange-400 hover:bg-orange-500"
-                }`}
-              >
-                {addedToReadList ? "Added to Read List ✓" : "Add to Read List"}
+                className="px-4 py-2 cursor-pointer rounded-lg text-white font-medium transition-colors bg-orange-400 hover:bg-orange-500">
+                Add to Read List
               </button>
             </div>
           </div>

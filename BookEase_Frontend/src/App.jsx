@@ -14,6 +14,7 @@ function App() {
   
    const Dashboard = lazy(()=>import('./Components/Dashboard.jsx'))
    const MyBooks = lazy(()=>import('./Components/MyBooks.jsx'))
+   const ReadingList = lazy(()=>import('./Components/Reading_List.jsx'))
 
 
   return (
@@ -27,6 +28,8 @@ function App() {
               <Route path='/dashboard' element={<PrivetRoute><Base_page /></PrivetRoute>} >
                 <Route index element={<Suspense fallback={<Spinner />}><Dashboard/></Suspense>} />
                 <Route path="/dashboard/mybooks" element={<Suspense fallback={<Spinner />}><MyBooks/></Suspense>} />
+                <Route path="/dashboard/readinglist" element={<Suspense fallback={<Spinner />}><ReadingList/></Suspense>} />
+
 
 
               </Route>

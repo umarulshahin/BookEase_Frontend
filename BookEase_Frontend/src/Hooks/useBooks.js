@@ -1,8 +1,8 @@
 import React from "react";
 import UserAxios from "../Axios/UserAxios";
-import { BookManagement_Url } from "../Utils/Constance";
+import { BookManagement_Url, ReadingList_Url } from "../Utils/Constance";
 import { useDispatch } from "react-redux";
-import { addBooks, addNewBooks, DeleteBooks } from "../Redux/BooksSlice";
+import { addBooks, addNewBooks, addReadingList, DeleteBooks } from "../Redux/BooksSlice";
 import { toast } from "sonner";
 
 const useBooks = () => {
@@ -93,7 +93,64 @@ const useBooks = () => {
     }
   };
 
-  return { Get_Books, Add_BookAxios, Delete_BookAxios,Update_BookAxios};
+  const Get_Reading_list = async (data)=>{
+
+    try{
+
+        const response = await UserAxios.get(ReadingList_Url,{
+
+            params : {'id': data},
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }
+    )
+    if(response.status === 200){
+        console.log(response.data,'reading list')
+        dispatch(addReadingList(response.data))
+    }
+
+    }catch(error){
+        console.error(error,'get reading list error');
+        if(error.response?.status === 401){
+            toast.error("Unauthorized access. Please log in again.");
+        }
+
+        toast.warning('Something went wrong. Please try again')
+    }
+  }
+
+  const addReadingListAxios = async(data)=>{
+
+    console.log(data,'add reading list data')
+
+    try{
+        const response = await UserAxios.post(ReadingList_Url,data,{
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        if(response.status === 200){
+            console.log(response.data,'add reading list')
+            toast.success("Book added to reading list successfully")
+        }
+
+    }catch(error){
+        console.log(error,'error add reading list axios')
+        
+        if(error.response?.status === 401){
+            toast.error("Unauthorized access. Please log in again.");
+        }
+        if (error.response?.status=== 400){
+            const errorMessage = error.response.data?.error?  "This book is already in your reading list.": "Something went wrong. Please try again" ;
+            toast.warning(errorMessage)
+
+        }
+        
+    }
+  }
+
+  return { Get_Books, Add_BookAxios, Delete_BookAxios,Update_BookAxios,Get_Reading_list,addReadingListAxios};
 };
 
 export default useBooks;

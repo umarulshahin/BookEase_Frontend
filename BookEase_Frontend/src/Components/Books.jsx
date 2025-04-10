@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { BaseURL } from '../Utils/Constance';
 import { useNavigate } from 'react-router-dom';
 import ModalManager from '../Modals/ModalManager';
+import useBooks from '../Hooks/useBooks';
+import { useSelector } from 'react-redux';
 
 const Books = React.memo(({ books }) => {
   
   const [isModal, setIsModal] = useState(false)
   const [data,setData] = useState(null)
+  const {addReadingListAxios} = useBooks()
+  const user = useSelector((state)=>state.userdata.user_data)
 
   if (!books || books.length === 0) {
     return <div className="text-center p-8">No books available</div>;
@@ -19,6 +23,13 @@ const Books = React.memo(({ books }) => {
     }
   }
   
+  const handleAddList=(book)=>{
+    
+    const data = {book_id:book,user_id:user.id}
+    addReadingListAxios(data)
+  }
+
+
   return (
     <div className="container mx-auto p-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -37,7 +48,7 @@ const Books = React.memo(({ books }) => {
               <div className="absolute inset-0 bg-transparent bg-opacity-50 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button 
                   className="bg-orange-400 hover:bg-orange-500 font-semibold cursor-pointer text-white py-2 px-2 rounded-md transition-colors"
-                  onClick={() => console.log('Add to read list:', book.id)}
+                  onClick={()=> handleAddList(book.id)}
                 >
                   Add to Read List
                 </button>

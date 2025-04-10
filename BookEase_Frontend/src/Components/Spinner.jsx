@@ -7,7 +7,7 @@ const Spinner = ({children}) => {
   return (
     <>
     {ShowSpinner ? (
-        <div className=" flex flex-col  items-center  ">
+        <div className=" flex flex-col  items-center pt-40 ">
           <div
             className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-orange-400 mx-auto"
           ></div>

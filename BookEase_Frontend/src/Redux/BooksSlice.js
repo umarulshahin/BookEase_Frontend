@@ -6,7 +6,8 @@ const BooksSlice = createSlice({
     name: "books",
     initialState:{
 
-        books :null
+        books :null,
+        reading_list:null
 
     },
     reducers:{
@@ -20,11 +21,15 @@ const BooksSlice = createSlice({
             const id = action.payload
             state.books = state.books.filter((book)=>book.id !== id)
         },
+        addReadingList:(state,action)=>{
+            state.reading_list = action.payload
+        },
         RemoveBooks:(state,action)=>{
             state.books = null
+            state.reading_list = null
         }
     }
 })
 
-export const {addBooks,RemoveBooks,addNewBooks,DeleteBooks} = BooksSlice.actions
+export const {addBooks,RemoveBooks,addNewBooks,DeleteBooks,addReadingList} = BooksSlice.actions
 export default  BooksSlice.reducer
