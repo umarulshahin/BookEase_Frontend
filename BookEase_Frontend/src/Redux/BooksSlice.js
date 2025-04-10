@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-
 const BooksSlice = createSlice({
 
     name: "books",
@@ -24,6 +23,11 @@ const BooksSlice = createSlice({
         addReadingList:(state,action)=>{
             state.reading_list = action.payload
         },
+        RemoveReadingList:(state,action)=>{
+            const id = action.payload
+            console.log(id,'id')
+            state.reading_list = state.reading_list.filter((book)=>book.book.id !== id)
+        },
         RemoveBooks:(state,action)=>{
             state.books = null
             state.reading_list = null
@@ -31,5 +35,5 @@ const BooksSlice = createSlice({
     }
 })
 
-export const {addBooks,RemoveBooks,addNewBooks,DeleteBooks,addReadingList} = BooksSlice.actions
+export const {addBooks,RemoveBooks,addNewBooks,DeleteBooks,addReadingList,RemoveReadingList} = BooksSlice.actions
 export default  BooksSlice.reducer

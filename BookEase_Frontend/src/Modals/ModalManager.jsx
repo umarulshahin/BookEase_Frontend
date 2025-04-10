@@ -4,6 +4,7 @@ import ViewBook from './ViewBook'
 import AddBook from './AddBook'
 import DeleteBook from './DeleteBook'
 import EditBook from './EditBook'
+import Remove_List from './Remove_List'
 
 const ModalManager = ({data,modalType,isModal,onClose}) => {
     
@@ -22,6 +23,9 @@ const ModalManager = ({data,modalType,isModal,onClose}) => {
 
         case "editBook":
             return (<EditBook data={data} isModal={isModal} onClose={onClose} />)
+
+        case "RemoveBook":
+            return (<Remove_List data={data} isModal={isModal} onClose={onClose}  />)
         default:
             return null
     }
