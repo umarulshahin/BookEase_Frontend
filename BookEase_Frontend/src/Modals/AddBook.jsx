@@ -33,7 +33,7 @@ const AddBook = ({ isModal, onClose }) => {
   ];
 
 
-  const namePattern = /^(?!\s+$)[A-Za-z][A-Za-z0-9_ ]{2,}$/;
+  const namePattern = /^[A-Za-z][A-Za-z0-9 _@!#$%^&*().,-]{2,}$/;
 
   const validationSchema = Yup.object({
     book_title: Yup.string()
