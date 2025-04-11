@@ -42,7 +42,6 @@ const useUser = () => {
         }
       })
       if (response.status === 200){
-        console.log(response.data, "update user ")
         dispatch(setUserData(response.data?.data))
         toast.success("User details updated successfully.")
       }

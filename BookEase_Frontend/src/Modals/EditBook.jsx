@@ -65,7 +65,6 @@ const EditBook = ({ data, isModal, onClose }) => {
 
   // Handle form submission
   const handleSubmit = (values, { setSubmitting }) => {
-    console.log("Edit form values:", values);
     
     // Create FormData object for file upload
     const formData = new FormData();

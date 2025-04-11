@@ -31,7 +31,6 @@ const useBooks = () => {
         },
       });
       if (response.status === 201) {
-        console.log(response.data, "add book response");
         dispatch(addNewBooks(response.data.data));
         toast.success("Book added successfully");
       }
@@ -79,7 +78,6 @@ const useBooks = () => {
         },
       });
       if (response.status === 200) {
-        console.log(response.data, "update book response");
         Get_Books();
         toast.success("Book updated successfully");
       }
@@ -134,7 +132,7 @@ const useBooks = () => {
         }
 
     }catch(error){
-        console.log(error,'error add reading list axios')
+        console.error(error,'error add reading list axios')
         
         if(error.response?.status === 401){
             toast.error("Unauthorized access. Please log in again.");

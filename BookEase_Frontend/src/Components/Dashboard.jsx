@@ -3,14 +3,13 @@ import Books from './Books'
 import { useSelector } from 'react-redux'
 import useBooks from '../Hooks/useBooks'
 
-const Dashboard = React.memo(({isModal,onClose}) => {
+const Dashboard = React.memo(() => {
 
       const books = useSelector((state)=>state.booksdata.books)
       const {Get_Books} = useBooks()
       useEffect(()=>{
           Get_Books()
       },[])
-      console.log(books,'books')
       
   return (
     <div>

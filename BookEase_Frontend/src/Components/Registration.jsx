@@ -22,7 +22,6 @@ const Registration = () => {
   });
 
   const handleSubmit = (values,{ setSubmitting }) => {
-    console.log("Signup Data:", values);
     Register_Axios(values,setSubmitting)
   };
   

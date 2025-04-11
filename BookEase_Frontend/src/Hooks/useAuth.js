@@ -21,12 +21,11 @@ const useAuth = () => {
         },
       });
       if (response.status === 201) {
-        console.log(response.data, "sign up response");
         dispatch(setIsLogin(true))
         toast.success("Account succussfully created.");
       }
     } catch (error) {
-      console.log(error, "signup axios");
+      console.error(error, "signup axios");
 
       if (error.response) {
         const { data } = error.response;
@@ -68,7 +67,7 @@ const useAuth = () => {
         toast.success("Successfully Sign in");
       }
     } catch (error) {
-      console.log(error, "sign in axios error");
+      console.error(error, "sign in axios error");
       if (error.response.data.detail) {
         const errorMessage =
           error.response.data.detail || "Something went wrong";

@@ -67,7 +67,6 @@ const AddBook = ({ isModal, onClose }) => {
   // Handle form submission
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
 
-    console.log("Form values:", values);
     // Create FormData object for file upload
     const formData = new FormData();
     formData.append("book_title", values.book_title);

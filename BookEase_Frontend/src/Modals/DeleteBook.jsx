@@ -3,11 +3,9 @@ import useBooks from '../Hooks/useBooks';
 
 const DeleteBook = ({ data, isModal, onClose }) => {
   if (!isModal) return null;
-  console.log(data,'delete book ')
 
   const {Delete_BookAxios} = useBooks()
   const handleDelete =(data)=>{
-    console.log(data,'delete')
     Delete_BookAxios(data)
     onClose()
   }

@@ -25,7 +25,6 @@ const BooksSlice = createSlice({
         },
         RemoveReadingList:(state,action)=>{
             const id = action.payload
-            console.log(id,'id')
             state.reading_list = state.reading_list.filter((book)=>book.book.id !== id)
         },
         RemoveBooks:(state,action)=>{
