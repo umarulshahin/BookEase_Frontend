@@ -24,7 +24,7 @@ This is the **frontend** part of the BookEase project — a book management and 
 
 ### 1. Clone the Repo
 
-      git clone https://github.com/your-username/bookease-frontend.git
+      git clone https://github.com/umarulshahin/BookEase_Frontend.git
       
       cd bookease-frontend
 
